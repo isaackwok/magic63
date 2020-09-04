@@ -27,7 +27,7 @@ export default function Home() {
                 請心中想一個數字 ( 0 ~ 63 )，我會把它猜出來！
               </p>
               <button
-                className="shadow transition ease-in-out duration-300 transform hover:scale-110 hover:-translate-y-1 hover:text-white p-2 m-2 bg-green-300 rounded hover:bg-green-500 cursor-pointer outline-none w-32 self-center"
+                className="shadow m-5 transition ease-in-out duration-300 transform hover:scale-110 hover:-translate-y-1 hover:text-white p-2 m-2 bg-green-300 rounded hover:bg-green-500 cursor-pointer outline-none w-32 self-center"
                 onClick={() => setCurrentTableIndex(0)}
               >
                 Start
