@@ -18,7 +18,9 @@ export default function Home() {
 
   return (
     <>
-      <Head></Head>
+      <Head>
+        <title>Magic 63</title>
+      </Head>
       <div className="w-full flex justify-center content-center h-screen px-5">
         <div className="inline-flex flex-col justify-center">
           {currentTableIndex === -1 ? (
