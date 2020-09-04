@@ -1,5 +1,7 @@
 import Head from "next/head";
 import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
 
 export default function Home() {
   let numbers = generateNumbers();
@@ -15,62 +17,76 @@ export default function Home() {
   };
 
   return (
-    <div className="w-full flex justify-center content-center h-screen">
-      <div className="inline-flex flex-col justify-center">
-        {currentTableIndex === -1 ? (
-          <>
-            <p className="text-lg text-center text-gray-700">
-              請心中想一個數字 ( 0 ~ 63 )，我會把它猜出來！
-            </p>
-            <button
-              className="shadow transition ease-in-out duration-300 transform hover:scale-110 hover:-translate-y-1 hover:text-white p-2 m-2 bg-green-300 rounded hover:bg-green-500 cursor-pointer outline-none w-32 self-center"
-              onClick={() => setCurrentTableIndex(0)}
-            >
-              Start
-            </button>
-          </>
-        ) : results.length < numbers.length ? (
-          <>
-            <p className="text-lg text-center text-gray-700">
-              請問你心想的數字有在下表中嗎？
-            </p>
-            <NumberTable numbers={numbers[currentTableIndex]} />
-            <div className="self-center">
+    <>
+      <Head></Head>
+      <div className="w-full flex justify-center content-center h-screen px-5">
+        <div className="inline-flex flex-col justify-center">
+          {currentTableIndex === -1 ? (
+            <>
+              <p className="text-lg text-center text-gray-700">
+                請心中想一個數字 ( 0 ~ 63 )，我會把它猜出來！
+              </p>
               <button
-                className="shadow transition ease-in-out duration-300 transform hover:scale-110 hover:-translate-y-1 hover:text-white p-2 m-2 bg-blue-300 rounded hover:bg-blue-500 cursor-pointer outline-none w-32"
-                onClick={() => clickHandler(true)}
+                className="shadow transition ease-in-out duration-300 transform hover:scale-110 hover:-translate-y-1 hover:text-white p-2 m-2 bg-green-300 rounded hover:bg-green-500 cursor-pointer outline-none w-32 self-center"
+                onClick={() => setCurrentTableIndex(0)}
               >
-                Yes
+                Start
               </button>
+            </>
+          ) : results.length < numbers.length ? (
+            <>
+              <p className="text-lg text-center text-gray-700">
+                請問你心想的數字有在下表中嗎？
+              </p>
+              <NumberTable numbers={numbers[currentTableIndex]} />
+              <div className="self-center">
+                <button
+                  className="shadow transition ease-in-out duration-300 transform hover:scale-110 hover:-translate-y-1 hover:text-white p-2 m-2 bg-blue-300 rounded hover:bg-blue-500 cursor-pointer outline-none w-32"
+                  onClick={() => clickHandler(true)}
+                >
+                  Yes
+                </button>
+                <button
+                  className="shadow transition ease-in-out duration-300 transform hover:scale-110 hover:-translate-y-1 hover:text-white p-2 m-2 bg-red-300 rounded hover:bg-red-500 cursor-pointer outline-none w-32"
+                  onClick={() => clickHandler(false)}
+                >
+                  No
+                </button>
+              </div>{" "}
+            </>
+          ) : (
+            <>
+              <p className="text-gray-700 text-5xl text-center p-3">
+                你心裡的數字是{" "}
+                {results
+                  .map((included, idx) =>
+                    included ? parseInt(min(numbers[idx])) : null
+                  )
+                  .reduce((a, b) => a + b)}{" "}
+                ！
+              </p>
               <button
-                className="shadow transition ease-in-out duration-300 transform hover:scale-110 hover:-translate-y-1 hover:text-white p-2 m-2 bg-red-300 rounded hover:bg-red-500 cursor-pointer outline-none w-32"
-                onClick={() => clickHandler(false)}
+                className="shadow transition ease-in-out duration-300 transform hover:scale-110 hover:-translate-y-1 hover:text-white p-2 m-2 bg-green-300 rounded hover:bg-green-500 cursor-pointer outline-none w-32 self-center"
+                onClick={restartHandler}
               >
-                No
+                Restart
               </button>
-            </div>{" "}
-          </>
-        ) : (
-          <>
-            <p className="text-gray-700 text-5xl text-center p-3">
-              你心裡的數字是{" "}
-              {results
-                .map((included, idx) =>
-                  included ? parseInt(min(numbers[idx])) : null
-                )
-                .reduce((a, b) => a + b)}{" "}
-              ！
-            </p>
-            <button
-              className="shadow transition ease-in-out duration-300 transform hover:scale-110 hover:-translate-y-1 hover:text-white p-2 m-2 bg-green-300 rounded hover:bg-green-500 cursor-pointer outline-none w-32 self-center"
-              onClick={restartHandler}
+            </>
+          )}
+        </div>
+        <footer className="fixed bottom-0 w-64 p-5">
+          <hr />
+          <div className="text-gray-500 mt-5 text-center">
+            <a
+              href="https://isaac0625.github.io/"
+              className="hover:text-green-500"
             >
-              Restart
-            </button>
-          </>
-        )}
+              <FontAwesomeIcon icon={faGithub} /> by Isaac Kwok
+            </a>
+          </div>
+        </footer>
       </div>
-    </div>
+    </>
   );
 }
 
