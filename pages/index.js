@@ -56,7 +56,7 @@ export default function Home() {
               你心裡的數字是{" "}
               {results
                 .map((included, idx) =>
-                  included ? parseInt(numbers[idx][0]) : null
+                  included ? parseInt(min(numbers[idx])) : null
                 )
                 .reduce((a, b) => a + b)}{" "}
               ！
@@ -110,7 +110,7 @@ function generateNumbers() {
       if (digit == "1") numbers[i].push(n);
     }
   }
-  return numbers.map((arr) => chunkArrayInGroups(arr, 8));
+  return numbers.map((arr) => chunkArrayInGroups(shuffle(arr), 8));
 }
 
 function chunkArrayInGroups(arr, size) {
@@ -119,4 +119,22 @@ function chunkArrayInGroups(arr, size) {
     newArray.push(arr.slice(i, i + size));
   }
   return newArray;
+}
+
+function shuffle(a) {
+  var j, x, i;
+  for (i = a.length - 1; i > 0; i--) {
+    j = Math.floor(Math.random() * (i + 1));
+    x = a[i];
+    a[i] = a[j];
+    a[j] = x;
+  }
+  return a;
+}
+
+function min(nums) {
+  nums = nums.flat();
+  let temp = nums[0];
+  nums.forEach((n) => (n < temp ? (temp = n) : null));
+  return temp;
 }
