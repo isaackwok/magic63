@@ -80,7 +80,7 @@ export default function Home() {
           <hr />
           <div className="text-gray-500 mt-5 text-center">
             <a
-              href="https://isaackwok.github.io/magic63"
+              href="https://github.com/isaackwok/magic63"
               className="hover:text-green-500"
             >
               <FontAwesomeIcon icon={faGithub} /> by Isaac Kwok
